@@ -1,6 +1,6 @@
 # RetroFlix - Web based retro game downloader & library manager
 
-**RetroFlix** is frontend to download and manage legacy & retro applications and launch them using their target emulator.
+**RetroFlix** is a frontend to download and manage legacy & retro applications and launch them using their target emulators.
 
 Currently only one game db and a handfull of systems are supported, but more may be added at some point, depending on interest.
 
