@@ -1,0 +1,72 @@
+body{
+  background-color: black;
+  color: white;
+}
+
+h1, h2, h3{
+  padding: 0;
+  margin: 0;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+a:visited{
+  color: white;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+#sidebar{
+  float: left;
+  border-right: 2px solid gray;
+  padding-right: 5px;
+}
+
+#main_content{
+  float: left;
+  margin-left: 20px;
+  width: 75%;
+}
+
+.play_link{
+  color: green;
+}
+
+.play_link:visited{
+  color: green;
+}
+
+.play_link{
+  color: green;
+}
+
+.play_link:visited{
+  color: green;
+}
+
+.dl_link{
+  color: blue;
+}
+
+.dl_link:visited{
+  color: blue;
+}
+
+.game_preview{
+  margin-bottom: 10px;
+}
+
+.preview_screen{
+  float: left;
+  margin-right: 10px;
+}
+
+.preview_text{
+  float: right;
+  margin-top: 10px;
+}
