@@ -31,6 +31,9 @@ module RetroFlix
   # in hours
   CACHE_TIMEOUT = 24
 
+  # Games to omit
+  OMIT = [/\[BIOS\].*/, /\[Program\].*/, /\[SegaNet\].*/]
+
   ###
 
   def self.cached(id, &setter)
@@ -59,7 +62,7 @@ module RetroFlix
       parser.xpath(GAMES_XPATH).each { |node|
         href  = node.attribute("href").to_s
         title = node.text
-        games[title] = href
+        games[title] = href unless OMIT.any? { |o| title =~ o }
       }   
 
       games

@@ -2,12 +2,15 @@
 # Part of RetroFlix
 
 module RetroFlix
+  # Run on main display
+  DISPLAY="DISPLAY=:0"
+
   # Configure emulators to for various systems
   EMULATORS = {
     :N64     => "",
-    :NES     => "nestopia \"GAME\"",
-    :SNES    => "zsnes \"GAME\"",
-    :Genesis => "gens \"GAME\""
+    :NES     => "#{DISPLAY} nestopia \"GAME\"",
+    :SNES    => "#{DISPLAY} zsnes \"GAME\"",
+    :Genesis => "#{DISPLAY} gens \"GAME\""
   }
 
   # fork / execs emaulator process & detaches

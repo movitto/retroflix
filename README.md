@@ -21,11 +21,14 @@ RetroFlix is built as a [Sinatra](http://www.sinatrarb.com/) web service.
 
 To use [install Ruby](https://www.ruby-lang.org/en/) and install the following gems:
 
-```$ gem install sinatra ruby-zip curb nokogiri```
+```$ gem install sinatra rubyzip curb nokogiri```
 
 
 If the previous produces any errors, check the gem documentation for the corresponding
 dependencies (curb requires libcurl-dev which may need to be installed seperately).
+
+If a recent version of Ruby is not available for your system, you may want to
+try out [rbenv](https://github.com/rbenv/rbenv).
 
 Launch it with
 

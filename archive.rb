@@ -13,7 +13,8 @@ module RetroFlix
     f.write archive
 
     begin
-      Zip::File.open(f.path).first.get_input_stream.read
+      zf = Zip::File.open(f.path).first
+      [zf.name, zf.get_input_stream.read]
     rescue Zip::Error => e
       archive
     end

@@ -138,10 +138,13 @@ get "/game/:system/:game" do
     doc.div {
       game_path = "#{system}/#{URI.encode(game)}"
       play_path = "/play/#{game_path}"
+      delete_path = "/delete/#{game_path}"
       dl_path   = "/download/#{game_path}"
 
       if RetroFlix.have_game?(system, game)
         doc.a(:href => "#{play_path}", :class => "play_link").text "Play"
+        doc.a(:href => "#{delete_path}", :class => "delete_link").text "Delete"
+
       else
         doc.a(:href => "#{dl_path}", :class => "dl_link").text "Download"
       end
@@ -169,6 +172,17 @@ get "/play/:system/:game" do
   redirect "/game/#{system}/#{game}"
 end
 
+# Play specified game
+get "/delete/:system/:game" do
+  system = validate_system!(params)
+  game = URI.decode(params[:game])
+  puts "Playing #{game}"
+
+  RetroFlix::delete_game(system.intern, game)
+
+  redirect "/game/#{system}/#{game}"
+end
+
 # Download specified game
 get "/download/:system/:game" do
   system = validate_system!(params)
@@ -178,8 +192,8 @@ get "/download/:system/:game" do
   puts "Downloading #{game} for #{system}"
 
   downloaded = RetroFlix::download(system.intern, game)
-  extracted  = RetroFlix.extract_archive(downloaded)
-  RetroFlix.write_game(system, game, extracted)
+  name, extracted  = *RetroFlix.extract_archive(downloaded)
+  RetroFlix.write_game(system, game, name, extracted)
 
   redirect "/game/#{system}/#{URI.encode(game)}"
 end

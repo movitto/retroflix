@@ -13,13 +13,14 @@ module RetroFlix
   end
 
   def self.game_path_for(system, game)
-    "#{game_dir_for(system)}/#{game}"
+    dir = "#{game_dir_for(system)}/#{game}"
+    Dir.glob("#{dir}/*").first
   end
 
-  def self.write_game(system, game, contents)
+  def self.write_game(system, game, game_file, contents)
     dir = game_dir_for(system)
-    FileUtils.mkdir_p(dir) unless File.directory?(dir)
-    File.write("#{dir}/#{game}", contents)
+    FileUtils.mkdir_p("#{dir}/#{game}/") unless File.directory?(dir)
+    File.write("#{dir}/#{game}/#{game_file}", contents)
   end
 
   def self.library_games_for(systems)
@@ -32,5 +33,9 @@ module RetroFlix
 
   def self.have_game?(system, game)
     library_games_for(system).include?(game)
+  end
+
+  def self.delete_game(system, game)
+    FileUtils.rm_rf("#{game_dir_for(system)}/#{game}")
   end
 end
