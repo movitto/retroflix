@@ -9,7 +9,7 @@ module RetroFlix
   GAMES_DIR = "games/"
 
   def self.game_dir_for(system)
-    "#{GAMES_DIR}/#{system}"
+    "#{GAMES_DIR}#{system}"
   end
 
   def self.game_path_for(system, game)
@@ -19,7 +19,7 @@ module RetroFlix
 
   def self.write_game(system, game, game_file, contents)
     dir = game_dir_for(system)
-    FileUtils.mkdir_p("#{dir}/#{game}/") unless File.directory?(dir)
+    FileUtils.mkdir_p("#{dir}/#{game}/") unless File.directory?("#{dir}/#{game}/")
     File.write("#{dir}/#{game}/#{game_file}", contents)
   end
 
