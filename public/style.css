@@ -1,6 +1,16 @@
+@font-face{
+  font-family: 'Retroville';
+  src: url('/RetrovilleNC.ttf');
+}
+
+@font-face{
+  font-family: 'Vonique64';
+  src: url('/Vonique_64.ttf');
+}
+
 body{
-  background-color: black;
-  color: white;
+  background-color: #666547;
+  color: #6FCB9F;
 }
 
 h1, h2, h3{
@@ -9,11 +19,22 @@ h1, h2, h3{
 }
 
 a{
-  color: white;
+  color: #FFFEB3;
   text-decoration: none;
 }
 
 a:visited{
+  color: #FFFEB3;
+}
+
+#main_title{
+  font-family: 'Retroville', serif;
+  font-size: 4em;
+}
+
+.game_title{
+  font-family: 'Vonique64', serif;
+  font-weight: bold;
   color: white;
 }
 
@@ -24,7 +45,12 @@ a:visited{
 #sidebar{
   float: left;
   border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
   padding-right: 5px;
+  background-color: #766A47;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Vonique64', serif;
 }
 
 #main_content{
@@ -33,28 +59,15 @@ a:visited{
   width: 75%;
 }
 
-.play_link{
-  color: green;
+.delete_link,
+.delete_link:visited{
+  color: #FB2E01;
 }
 
-.play_link:visited{
-  color: green;
-}
-
-.play_link{
-  color: green;
-}
-
-.play_link:visited{
-  color: green;
-}
-
-.dl_link{
-  color: blue;
-}
-
+.play_link, .dl_link,
+.play_link:visited,
 .dl_link:visited{
-  color: blue;
+  color: #9BB4CE;
 }
 
 .game_preview{

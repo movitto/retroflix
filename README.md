@@ -21,7 +21,7 @@ RetroFlix is built as a [Sinatra](http://www.sinatrarb.com/) web service.
 
 To use [install Ruby](https://www.ruby-lang.org/en/) and install the following gems:
 
-```$ gem install sinatra rubyzip curb nokogiri```
+```$ gem install sinatra rubyzip curb nokogiri thin```
 
 
 If the previous produces any errors, check the gem documentation for the corresponding

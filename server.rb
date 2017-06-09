@@ -10,18 +10,10 @@ require_relative './site'
 
 GAMES_PER_PAGE = 5
 
-# TODO use workers (sidekiq) to retrieve remote
-# server contents (game lists, info, & contents).
-# Will require async interaction & callbacks
-
-# TODO as part of this ensure multiple requests are
-# queued and/or block subsequent content downloads
-# until first is completed
-
 # Landing page, just render layout & title
 get '/' do
   layout("/") { |doc|
-    doc.h1 "RetroFlix"
+    doc.h1(:id => "main_title").text "RetroFlix"
   }
 end
 
@@ -32,6 +24,8 @@ get "/system/:system" do
 
   layout(system) { |doc|
     doc.h3.text "Games for #{system}"
+    doc.a(:href => "/system/#{system}/1").text "Previews"
+
     games.keys.each { |game|
       doc.div {
         game_path = "#{system}/#{URI.encode(game)}"
@@ -42,10 +36,12 @@ get "/system/:system" do
         doc.a(:href => info_path).text game
 
         if RetroFlix.have_game?(system, game)
-          doc.a(:href => play_path, :class => "play_link").text "P"
+          doc.text " - "
+          doc.a(:href => play_path, :class => "play_link").text "[P]"
 
         else
-          doc.a(:href => dl_path, :class => "dl_link").text "D"
+          doc.text " - "
+          doc.a(:href => dl_path, :class => "dl_link").text "[D]"
         end
       }
     }
@@ -131,8 +127,8 @@ get "/game/:system/:game" do
   game   = URI.decode(params[:game])
   meta   = RetroFlix::game_meta_for(system.intern, game)
 
-  layout(system) { |doc|
-    doc.h3 game
+  layout("#{system}-game") { |doc|
+    doc.h3(:class => "game_title").text game
     doc.text "for the "
     doc.a(:href => "/system/#{system}/1").text system
     doc.div {
@@ -142,8 +138,9 @@ get "/game/:system/:game" do
       dl_path   = "/download/#{game_path}"
 
       if RetroFlix.have_game?(system, game)
-        doc.a(:href => "#{play_path}", :class => "play_link").text "Play"
-        doc.a(:href => "#{delete_path}", :class => "delete_link").text "Delete"
+        doc.a(:href => "#{play_path}", :class => "play_link").text "[Play]"
+        doc.text " / "
+        doc.a(:href => "#{delete_path}", :class => "delete_link").text "[Delete]"
 
       else
         doc.a(:href => "#{dl_path}", :class => "dl_link").text "Download"

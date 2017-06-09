@@ -16,6 +16,14 @@ def layout(section, &inner)
 
       doc.body {
         doc.div(:id => "sidebar") {
+          if section == "/"
+            doc.div.bold.text "RF"
+          else
+            doc.div {
+              doc.a(:href => "/").text "RF"
+            }
+          end
+
           if section == "library"
             doc.div.bold.text "My Library"
           else
@@ -28,6 +36,10 @@ def layout(section, &inner)
             doc.div {
               if section == sys.to_s
                 doc.div.bold.text sys
+              elsif section == "#{sys}-game"
+                doc.div.bold {
+                  doc.a(:href => "/system/#{sys}/1").text sys
+                }
               else
                 doc.a(:href => "/system/#{sys}/1").text sys
               end
