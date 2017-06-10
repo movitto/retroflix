@@ -32,7 +32,7 @@ def layout(section, &inner)
             }
           end
 
-          RetroFlix::SYSTEMS.keys.each { |sys|
+          RetroFlix::systems.each { |sys|
             doc.div {
               if section == sys.to_s
                 doc.div.bold.text sys

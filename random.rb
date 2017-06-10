@@ -1,21 +1,21 @@
 # Helper script to download random game
 # Part of RetroFlix
 
-require_relative './scrape'
-require_relative './library'
+require_relative './lib/conf'
+require_relative './lib/scrape'
+require_relative './lib/library'
 
-system  = RetroFlix::SYSTEMS.keys.sample
+system  = RetroFlix::systems.sample
 
 games   = RetroFlix.games_for(system)
 game    = games.to_a.sample
 name    = game[0]
 url     = game[1]
 
-page    = RetroFlix.game_page_for(url)
+page    = RetroFlix.game_page_for(system, game)
 screens = RetroFlix.screens_for(page)
 desc    = RetroFlix.desc_for(page)
 
-dl_link = RetroFlix.download_link_for(url)
-RetroFlix.write_game(system, name, RetroFlix.download(system, name, dl_link))
+RetroFlix.write_game(system, name, name, RetroFlix.download(system, name))
 
 puts "Downloaded #{name} for #{system}"

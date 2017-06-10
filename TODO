@@ -1,15 +1,9 @@
-- css styling (themes)
-- background jobs / downloads
-  - queue multiple
-- notifications (push)
-- config (yaml)
-  - enabled systems
-  - emulators
-  - sync intervals
-- more emulator dbs
-  - dynamic system discovery
-- scrolling images from random games on main page
+- scrolling images on main page
+  - perhaps just static images in code base
 - pacakge as gem
 - standalone server process
   - daemonize
   - gracefully quit
+- background jobs / downloads
+  - queue multiple
+- notifications (push)

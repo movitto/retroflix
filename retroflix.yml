@@ -1,0 +1,42 @@
+---
+# App Wide Metadata
+meta:
+  games_dir: ./games/
+  games_per_page: 5
+  cache_time: 24 # hours
+
+# Game Databases
+databases:
+  default: emuparadise
+
+  emuparadise:
+    url: https://www.emuparadise.me
+    systems:
+      N64: 'Nintendo_64_ROMs/List-All-Titles/9'
+      NES: 'Nintendo_Entertainment_System_ROMs/List-All-Titles/13'
+      SNES: 'Super_Nintendo_Entertainment_System_(SNES)_ROMs/List-All-Titles/5'
+      Genesis: 'Sega_Genesis_-_Sega_Megadrive_ROMs/List-All-Titles/6'
+    paths:
+      games: "//a[contains(@class, 'gamelist')]"
+      screens: "//a[contains(@class, 'sc')]/img"
+      desc: "//div[contains(@id, 'game-descriptions')]/div[contains(@class, 'description-text')]"
+      dl: "//a[contains(@id, 'download-link')]"
+    omit:
+      - "/\\[BIOS\\].*/"
+      - "/\\[Program\\].*/"
+      - "/\\[SegaNet\\].*/"
+
+  # TODO coolroms, other dbs
+
+# Emulator binaries
+emulators:
+  env: "DISPLAY=:0"
+  NES:
+    bin: nestopia
+    flags: "\"GAME\""
+  SNES:
+    bin: znes
+    flags: "\"GAME\""
+  Genesis:
+    bin: gens
+    flags: "\"GAME\""

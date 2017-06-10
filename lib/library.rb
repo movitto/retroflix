@@ -6,10 +6,8 @@
 require 'fileutils'
 
 module RetroFlix
-  GAMES_DIR = "games/"
-
   def self.game_dir_for(system)
-    "#{GAMES_DIR}#{system}"
+    "#{Config.meta.games_dir}#{system}"
   end
 
   def self.game_path_for(system, game)

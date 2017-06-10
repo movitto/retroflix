@@ -2,13 +2,12 @@
 # Part of RetroFlix
 
 require 'sinatra'
-require_relative './library'
-require_relative './scrape'
-require_relative './archive'
-require_relative './emulator'
+require_relative './lib/conf'
+require_relative './lib/library'
+require_relative './lib/scrape'
+require_relative './lib/archive'
+require_relative './lib/emulator'
 require_relative './site'
-
-GAMES_PER_PAGE = 5
 
 # Landing page, just render layout & title
 get '/' do
@@ -54,12 +53,13 @@ get "/system/:system/:num" do
   num    = validate_num!(params)
   games  = RetroFlix.games_for(system.intern)
 
-  start_index  = (num-1)*GAMES_PER_PAGE
-  end_index    = [start_index+GAMES_PER_PAGE-1, games.size-1].min
+  gpp = Config.meta.games_per_page
+  start_index  = (num-1)*gpp
+  end_index    = [start_index+gpp-1, games.size-1].min
 
   is_first  = start_index == 0
   is_last   = end_index == (games.size - 1)
-  last_page = (games.size / GAMES_PER_PAGE).to_i + 1
+  last_page = (games.size / gpp).to_i + 1
 
   layout(system) { |doc|
     doc.h3.text "Games for #{system}"
@@ -87,7 +87,7 @@ get "/system/:system/:num" do
         }
 
         doc.div(:class => "preview_text") {
-          doc.a(:href => "/game/#{game_path}").text game 
+          doc.a(:href => "/game/#{game_path}").text game
         }
 
         doc.div(:style => "clear: both;")
@@ -99,7 +99,7 @@ end
 # Games downloaded locally
 get "/library" do
   layout("library") { |doc|
-    RetroFlix::SYSTEMS.keys.each_with_index { |sys, i|
+    RetroFlix::systems.each_with_index { |sys, i|
       doc.h3.text sys
       RetroFlix.library_games_for(sys).each { |game|
         game_path = "#{sys}/#{URI.encode(game)}"
@@ -113,7 +113,7 @@ get "/library" do
         }
       }
 
-      unless i == (RetroFlix::SYSTEMS.size-1)
+      unless i == (RetroFlix::systems.size-1)
         doc.br
         doc.br
       end
