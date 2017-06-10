@@ -38,6 +38,10 @@ a:visited{
   color: white;
 }
 
+.slideshow{
+  float: right;
+}
+
 .bold{
   font-weight: bold;
 }

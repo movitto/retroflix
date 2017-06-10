@@ -12,7 +12,12 @@ require_relative './site'
 # Landing page, just render layout & title
 get '/' do
   layout("/") { |doc|
+    doc.script(:type => "text/javascript",
+               :src  => "slideshow.js")
     doc.h1(:id => "main_title").text "RetroFlix"
+    0.upto(5){ |n|
+      doc.img(:class => "slideshow", :src => "slideshow/#{n}.jpg")
+    }
   }
 end
 
