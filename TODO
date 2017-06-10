@@ -1,9 +1,7 @@
-- scrolling images on main page
-  - perhaps just static images in code base
-- pacakge as gem
 - standalone server process
   - daemonize
   - gracefully quit
+- pacakge as gem
 - background jobs / downloads
   - queue multiple
 - notifications (push)

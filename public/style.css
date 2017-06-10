@@ -29,7 +29,7 @@ a:visited{
 
 #main_title{
   font-family: 'Retroville', serif;
-  font-size: 4em;
+  font-size: 6em;
 }
 
 .game_title{
@@ -39,6 +39,7 @@ a:visited{
 }
 
 .slideshow{
+  display: none;
   float: right;
 }
 
@@ -61,6 +62,15 @@ a:visited{
   float: left;
   margin-left: 20px;
   width: 75%;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+
+}
+
+@keyframes blinker {
+  50% { opacity: 0;  }
 }
 
 .delete_link,

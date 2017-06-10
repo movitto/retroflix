@@ -14,7 +14,9 @@ get '/' do
   layout("/") { |doc|
     doc.script(:type => "text/javascript",
                :src  => "slideshow.js")
-    doc.h1(:id => "main_title").text "RetroFlix"
+    doc.h1(:id => "main_title",
+           :class => "blink_me",
+          :style  => "margin: auto;").text "RetroFlix"
     0.upto(5){ |n|
       doc.img(:class => "slideshow", :src => "slideshow/#{n}.jpg")
     }
@@ -58,7 +60,7 @@ get "/system/:system/:num" do
   num    = validate_num!(params)
   games  = RetroFlix.games_for(system.intern)
 
-  gpp = Config.meta.games_per_page
+  gpp = RetroFlix::Config.meta.games_per_page
   start_index  = (num-1)*gpp
   end_index    = [start_index+gpp-1, games.size-1].min
 
