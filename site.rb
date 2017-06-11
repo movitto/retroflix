@@ -74,3 +74,8 @@ def validate_num!(params)
   num = params[:num]
   Integer(num) # raises ArgumentError if invalid int
 end
+
+# Generate javascript invoked when download link is clicked
+def dl_link_onclick(game)
+  "alert(\"Downloading #{game}, refresh page momentarily to play...\")"
+end

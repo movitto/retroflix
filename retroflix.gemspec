@@ -13,10 +13,11 @@ Gem::Specification.new do |s|
     s.files   = PKG_FILES
     s.executables   = ['rf']
 
-    s.add_dependency('sinatra', '~> 2.0')
+    s.add_dependency('sinatra',  '~> 2.0')
     s.add_dependency('nokogiri', '~> 1.8')
-    s.add_dependency('rubyzip', '~> 1.2')
-    s.add_dependency('curb', '~> 0.9.3')
+    s.add_dependency('rubyzip',  '~> 1.2')
+    s.add_dependency('curb',     '~> 0.9.3')
+    s.add_dependency('workers',  '~> 0.6')
 
     s.authors = ["Mo Morsi"]
     s.email = "mo@morsi.org"

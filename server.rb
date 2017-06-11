@@ -2,6 +2,10 @@
 # Main sinatra application.
 # Part of RetroFlix
 
+# require workers module initially so as
+# to register global process hooks
+require_relative './lib/workers'
+
 require 'sinatra'
 require_relative './lib/conf'
 require_relative './lib/library'
@@ -48,7 +52,8 @@ get "/system/:system" do
 
         else
           doc.text " - "
-          doc.a(:href => dl_path, :class => "dl_link").text "[D]"
+          doc.a(:href => dl_path, :class => "dl_link",
+                :onclick => dl_link_onclick(game)).text "[D]"
         end
       }
     }
@@ -151,7 +156,9 @@ get "/game/:system/:game" do
         doc.a(:href => "#{delete_path}", :class => "delete_link").text "[Delete]"
 
       else
-        doc.a(:href => "#{dl_path}", :class => "dl_link").text "Download"
+        doc.a(:href    => "#{dl_path}",
+              :class   => "dl_link",
+              :onclick => dl_link_onclick(game)).text "Download"
       end
     }
 
@@ -196,9 +203,11 @@ get "/download/:system/:game" do
 
   puts "Downloading #{game} for #{system}"
 
-  downloaded = RetroFlix::download(system.intern, game)
-  name, extracted  = *RetroFlix.extract_archive(downloaded)
-  RetroFlix.write_game(system, game, name, extracted)
+  RetroFlix::background_job do
+    downloaded = RetroFlix::download(system.intern, game)
+    name, extracted  = *RetroFlix.extract_archive(downloaded)
+    RetroFlix.write_game(system, game, name, extracted)
+  end
 
   redirect "/game/#{system}/#{URI.encode(game)}"
 end
