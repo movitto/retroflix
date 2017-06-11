@@ -22,9 +22,9 @@ databases:
       desc: "//div[contains(@id, 'game-descriptions')]/div[contains(@class, 'description-text')]"
       dl: "//a[contains(@id, 'download-link')]"
     omit:
-      - "/\\[BIOS\\].*/"
-      - "/\\[Program\\].*/"
-      - "/\\[SegaNet\\].*/"
+      - "\\[BIOS\\].*"
+      - "\\[Program\\].*"
+      - "\\[SegaNet\\].*"
 
   # TODO coolroms, other dbs
 
