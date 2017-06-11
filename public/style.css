@@ -41,6 +41,16 @@ a:visited{
 .slideshow{
   display: none;
   float: right;
+  animation:fade 6s infinite;
+  -webkit-animation:fade 6s infinite;
+}
+
+@keyframes fade
+{
+    0%   {opacity:0}
+    33.333% { opacity: 1 }
+    66.666% { opacity: 1 }
+    100% { opacity: 0 }
 }
 
 .bold{

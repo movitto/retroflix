@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 # Main sinatra application.
 # Part of RetroFlix
 

@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+require 'daemons'
+
+dir = File.expand_path("../..", __FILE__)
+Daemons.run_proc 'server.rb' do
+  Dir.chdir dir
+  exec "./server.rb"
+end

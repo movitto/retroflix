@@ -5,7 +5,14 @@ require_relative './deep_struct'
 require 'yaml'
 
 module RetroFlix
-  CONFIG_FILE = './retroflix.yml'
+  CONFIG_FILES = [File.expand_path('~/.retroflix.yml'),
+                  File.expand_path('../../retroflix.yml', __FILE__)]
 
-  Config = DeepStruct.new(YAML.load_file(CONFIG_FILE))
+  unless CONFIG_FILES.any? { |cf| File.exists?(cf) }
+    raise RuntimeError, "cannot find config at #{CONFIG_FILES.join(", ")}"
+  end
+
+  CONFIG_FILES.each { |cf|
+    Config = DeepStruct.new(YAML.load_file(cf)) if File.exists?(cf) && !defined?(Config)
+  }
 end

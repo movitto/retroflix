@@ -1,6 +1,3 @@
-- standalone server process
-  - daemonize
-  - gracefully quit
 - pacakge as gem
 - background jobs / downloads
   - queue multiple
