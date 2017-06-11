@@ -30,6 +30,7 @@ a:visited{
 #main_title{
   font-family: 'Retroville', serif;
   font-size: 6em;
+  text-align: center;
 }
 
 .game_title{
@@ -40,9 +41,10 @@ a:visited{
 
 .slideshow{
   display: none;
-  float: right;
+  margin: auto;
   animation:fade 6s infinite;
   -webkit-animation:fade 6s infinite;
+  margin-top: 25px;
 }
 
 @keyframes fade
@@ -71,7 +73,7 @@ a:visited{
 #main_content{
   float: left;
   margin-left: 20px;
-  width: 75%;
+  width: 80%;
 }
 
 .blink_me {
