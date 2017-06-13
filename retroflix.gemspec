@@ -4,12 +4,14 @@ $LOAD_PATH.push File.expand_path("lib")
 GEM_NAME = 'retroflix'
 
 PKG_FILES =
-  Dir.glob('*.rb') + Dir.glob('lib/*.rb') +
+  Dir.glob('*.rb')        +
+  Dir.glob('lib/*.rb')    +
+  Dir.glob("public/**/*") +
   ['MIT-LICENSE', 'README.md', 'retroflix.yml']
 
 Gem::Specification.new do |s|
     s.name    = "retroflix"
-    s.version = '0.0.3'
+    s.version = '0.0.5'
     s.files   = PKG_FILES
     s.executables   = ['rf']
 
@@ -18,6 +20,7 @@ Gem::Specification.new do |s|
     s.add_dependency('rubyzip',  '~> 1.2')
     s.add_dependency('curb',     '~> 0.9.3')
     s.add_dependency('workers',  '~> 0.6')
+    s.add_dependency('daemons',  '~> 1.2')
 
     s.authors = ["Mo Morsi"]
     s.email = "mo@morsi.org"

@@ -15,29 +15,61 @@ Currently the following sites &amp; systems are supported:
 * NES
 * Sega Genesis / Master System
 
+## Dependencies
+
+RetroFlix is built as a [Sinatra](http://www.sinatrarb.com/) web service and shipped as a rubygem. To use it you will need to install the underlying dependencies.
+
+On Fedora 25:
+
+```$ sudo dnf install rubygems ruby-devel zlib-devel libcurl-devel redhat-rpm-config```
+
+On Ubuntu 16.04:
+
+```$sudo apt-get install ruby ruby-dev zlib1g-dev libcurl4-gnutls-dev```
+
+**Note** I was able to install and run RetroFlix on a Raspberry PI running [Rasbian Jessie](https://www.raspberrypi.org/downloads/raspbian/) 4.4 after installing
+the latest stable ruby version via [rbenv](https://github.com/rbenv/rbenv).
+
+Setup of that is outside the scope of this article but after ruby 2.4.1 is installed
+and activated, the Ubuntu instructions can be followed.
+
 ## Install
 
-RetroFlix is built as a [Sinatra](http://www.sinatrarb.com/) web service.
+Install the actual application with:
 
-To use [install Ruby](https://www.ruby-lang.org/en/) and install the following gems:
+```$ gem install --user-install retroflix```
 
-```$ gem install sinatra rubyzip curb nokogiri thin```
+**Note** the ***--user-install*** flag is specified so as to install RetroFlix and gem dependencies
+to your user's home dir. Use the following command if you wish to install the application systemwide:
+
+```$ sudo gem install retroflix```
 
 
-If the previous produces any errors, check the gem documentation for the corresponding
-dependencies (curb requires libcurl-dev which may need to be installed seperately).
+Simply launch the application with:
 
-If a recent version of Ruby is not available for your system, you may want to
-try out [rbenv](https://github.com/rbenv/rbenv).
-
-Launch it with
-
-```$ ruby server.rb```
+```$ rf```
 
 And navigate to [http://localhost:4567](http://localhost:4567) to download and manage games!
 
-**Note**: Inorder to play games you will need to download the emulator for the corresponding systems. See the  **emulators.rb** file for the current list of emulators used (may be configured there)
+**Note** if you get an error stating **rf command not found**, most likely your rubygems binary
+path needs to be added to your run path. To do so, run the following command:
 
+```export PATH=$PATH:~/.gem/ruby/2.3.0/bin```
+
+(replacing 2.3.0 w/ the version of Ruby you have installed locally)
+
+## Emulators
+
+Inorder to play games you will need to download the emulator for the corresponding systems.
+
+Currenly the default emulators are:
+
+* gens for the Sega Genesis / Master Drive
+* zsnes for Nintendo NES & SNES
+* mupen64 for Nintendo 64
+
+If these are not available on your system, copy the [Config File](https://raw.githubusercontent.com/movitto/retroflix/master/retroflix.yml)
+to ~/.retroflix.yml and edit it to reference the emulators you have locally.
 
 ## Screens
 
